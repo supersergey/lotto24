@@ -7,7 +7,11 @@
 ## Build instructions
 
 On Mac and Linux, execute `sh build.sh` from the command line . On other platforms,
-run `docker build -t transaction-service .`
+run 
+```ssh
+gradlew clean build
+docker build -t transaction-service .
+```
 
 ## Running the app
 
@@ -93,8 +97,8 @@ re-processing queue should help resolve those issues.
 
 I have selected MongoDB as a database engine, taking into account the following:
 1. Accounting systems usually receive high volume of the requests. Mongo is known for good horizontal
-scalability and sharding. Also, it is good for implementing the CQRS pattern, which seems like a good candidate for 
-high-loaded systems.
+scalability, sharding, and for implementing the CQRS pattern. This turns it into a good candidate for 
+building high-loaded systems.
 2. Mongo supports atomic upserts, which makes it easier to ensure concurrent consistency.
 3. With the recently added support of transactions, we may add some transactional functionality in the future,
 should this be needed.
