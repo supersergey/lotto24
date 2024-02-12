@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  mongo:
+    image: mongo:7.0
+    ports:
+      - 27017:27017
+
+  app:
+    build: .
+    image: transaction-service:latest
+    ports:
+      - 8080:8080
+    depends_on:
+      - mongo
+    environment:
+      DATASOURCE_URL: mongodb://db:27017/lotto24
+    links:
+      - mongo:db
